@@ -7,7 +7,11 @@ def delete_empty(current_floder:str):
     for root,dir,filename in os.walk(current_floder):
         for dirname in dir:
             dirpath=os.path.join(root,dirname)
-            if not os.listdir(dirpath):
+            try:
+                list_dir=os.listdir(dirpath)
+            except Exception as e:
+                print(str(e))
+            if not list_dir:
                 # delete empty floder
                 try:
                     os.removedirs(dirpath)
